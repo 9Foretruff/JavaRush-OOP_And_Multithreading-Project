@@ -12,10 +12,9 @@ public class Settings {
 
     public Settings(Configuration configuration, AbstractIsland island) {
         this.island = island;
-        if (configuration == Configuration.DEFAULT) {
-            setDefaultSettings(island);
-        } else {
-            setCustomSettings(island);
+        switch (configuration){
+            case DEFAULT -> setDefaultSettings(island);
+            case CUSTOM -> setCustomSettings(island);
         }
     }
 
