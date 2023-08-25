@@ -22,7 +22,6 @@ public class Mouse extends AbstractHerbivorous implements EatAnimal {
         setKilogramsOfFoodsInTheStomach(kilogramsOfFoodsInTheStomach);
     }
 
-
     @Override
     public void eatAnimal(AbstractAnimal animal) {
         int chanceToKill;

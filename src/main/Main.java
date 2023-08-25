@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws IncorrectIslandSizeException {
-        IslandWithRiverAndMountains islandWithRiver = new IslandWithRiverAndMountains(10, 10, "My Island 1", 1, 1);
+        IslandWithRiverAndMountains islandWithRiver = new IslandWithRiverAndMountains(40, 30, "My Island 1", 10, 10);
         Settings settings = new Settings(Configuration.DEFAULT , islandWithRiver);
         Menu menu = new Menu(islandWithRiver, settings);
     }

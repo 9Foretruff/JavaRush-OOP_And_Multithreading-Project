@@ -17,12 +17,12 @@ public abstract class AbstractIsland {
     private final String nameOfIsland;
     protected AbstractField[][] fields;
     private int countOfAnimalsOnIsland = 0;
-    public AbstractIsland(int width, int height, String nameOfIsland) throws IncorrectIslandSizeException {
+    public AbstractIsland(int height, int width, String nameOfIsland) throws IncorrectIslandSizeException {
         if (minWidth > width || height > height) throw new IncorrectIslandSizeException("Incorrect parameters ! Min width = 10 , Min height = 10");
         this.width = width;
         this.height = height;
         this.nameOfIsland = nameOfIsland;
-        this.fields = new AbstractField[width][height];
+        this.fields = new AbstractField[height][width];
     }
 
     public int getMinWidth() {

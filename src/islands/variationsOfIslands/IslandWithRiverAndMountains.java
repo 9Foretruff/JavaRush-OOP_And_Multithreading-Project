@@ -22,8 +22,12 @@ public class IslandWithRiverAndMountains extends AbstractIsland {
 
     @Override
     public void getMapFields() {
+        for (int i = 0; i < getWidth()/4; i++) {
+            System.out.print("\t");
+        }
+        System.out.println(getNameOfIsland());
         for (int i = 0; i < getHeight(); i++) {
-            for (int j = 0; j < getHeight(); j++) {
+            for (int j = 0; j < getWidth(); j++) {
                 System.out.print(fields[i][j].getPictureOfField());
             }
             System.out.print("\n");
