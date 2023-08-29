@@ -21,44 +21,4 @@ public abstract class AbstractHerbivorous extends AbstractAnimal implements EatP
             }
         }
     }
-
-    public double getKilogramsOfFoodForCompleteSaturation() {
-        return kilogramsOfFoodForCompleteSaturation;
-    }
-
-    public void setKilogramsOfFoodForCompleteSaturation(double kilogramsOfFoodForCompleteSaturation) {
-        this.kilogramsOfFoodForCompleteSaturation = kilogramsOfFoodForCompleteSaturation;
-    }
-
-    public double getKilogramsOfFoodsInTheStomach() {
-        return kilogramsOfFoodsInTheStomach;
-    }
-
-    public void setKilogramsOfFoodsInTheStomach(double kilogramsOfFoodsInTheStomach) {
-        this.kilogramsOfFoodsInTheStomach = kilogramsOfFoodsInTheStomach;
-    }
-
-    public double getWeightOfAnimal() {
-        return weightOfAnimal;
-    }
-
-    public void setWeightOfAnimal(double weightOfAnimal) {
-        this.weightOfAnimal = weightOfAnimal;
-    }
-
-    public String getPictureOfAnimal() {
-        return pictureOfAnimal;
-    }
-
-    public void setPictureOfAnimal(String pictureOfAnimal) {
-        this.pictureOfAnimal = pictureOfAnimal;
-    }
-
-    public String getNameOfAnimal() {
-        return nameOfAnimal;
-    }
-
-    public void setNameOfAnimal(String nameOfAnimal) {
-        this.nameOfAnimal = nameOfAnimal;
-    }
 }

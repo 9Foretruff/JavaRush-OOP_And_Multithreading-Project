@@ -10,8 +10,7 @@ public class Menu {
     private final AbstractIsland island;
     private boolean isRunning = true;
     private Settings settings;
-    private ScheduledExecutorService executorService = Executors.newScheduledThreadPool(100);
-
+    private ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
     public Menu(AbstractIsland island, Settings settings) {
         this.island = island;
         this.settings = settings;

@@ -2,19 +2,18 @@ package islands.fieldTypes;
 
 import animals.AbstractAnimal;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public abstract class AbstractField {
-    private HashMap<AbstractAnimal, Integer> animalsInFiled = new HashMap<>(); //TODO REMAKE
+    public ArrayList<AbstractAnimal> animalsOnField = new ArrayList<>();
     private String pictureOfField;
-
-
-    public void setPictureOfField(String pictureOfField) {
-        this.pictureOfField = pictureOfField;
-    }
 
     public String getPictureOfField() {
         return pictureOfField;
+    }
+
+    public void setPictureOfField(String pictureOfField) {
+        this.pictureOfField = pictureOfField;
     }
 
     abstract void setPicture();

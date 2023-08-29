@@ -1,10 +1,7 @@
 package animals.predators;
 
 import animals.AbstractAnimal;
-import animals.herbivorous.Caterpillar;
-import animals.herbivorous.Duck;
-import animals.herbivorous.Mouse;
-import animals.herbivorous.Rabbit;
+import animals.herbivorous.*;
 import plants.AbstractPlant;
 
 import java.util.Random;
@@ -16,6 +13,7 @@ public class Eagle extends AbstractPredator {
     private final double kilogramsOfFoodForCompleteSaturation = 1d;
     private final Random random = new Random();
     private double kilogramsOfFoodsInTheStomach = 0.5d;
+    private final int MAX_STEPS_PER_MOVE = 3;
 
     public Eagle() {
         setPictureOfAnimal(pictureOfAnimal);
@@ -23,6 +21,7 @@ public class Eagle extends AbstractPredator {
         setWeightOfAnimal(weightOfAnimal);
         setKilogramsOfFoodForCompleteSaturation(kilogramsOfFoodForCompleteSaturation);
         setKilogramsOfFoodsInTheStomach(kilogramsOfFoodsInTheStomach);
+        setMaxStepsPerMove(MAX_STEPS_PER_MOVE);
     }
 
 
@@ -75,6 +74,13 @@ public class Eagle extends AbstractPredator {
     @Override
     public boolean eat(AbstractPlant plant) {
         return false;
+    }
+
+    @Override
+    public void reproduce(AbstractAnimal animal) {
+        if (animal instanceof Eagle){
+            newbornAnimals.add(new Eagle());
+        }
     }
 
 

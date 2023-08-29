@@ -9,6 +9,7 @@ public class IslandWithRiverAndMountains extends AbstractIsland {
 
     public IslandWithRiverAndMountains(int width, int height, String nameOfIsland, int countOfLakes, int countOfMountains) throws IncorrectIslandSizeException {
         super(width, height, nameOfIsland);
+        setIsland(this);
         this.countOfLakes = countOfLakes;
         this.countOfMountains = countOfMountains;
     }
@@ -22,7 +23,7 @@ public class IslandWithRiverAndMountains extends AbstractIsland {
 
     @Override
     public void getMapFields() {
-        for (int i = 0; i < getWidth()/4; i++) {
+        for (int i = 0; i < getWidth() / 4; i++) {
             System.out.print("\t");
         }
         System.out.println(getNameOfIsland());

@@ -12,6 +12,7 @@ public class Rabbit extends AbstractHerbivorous{
     private final double kilogramsOfFoodForCompleteSaturation = 0.45d;
     private final Random random = new Random();
     private double kilogramsOfFoodsInTheStomach = 0.25d;
+    private final int MAX_STEPS_PER_MOVE = 2;
 
     public Rabbit() {
         setPictureOfAnimal(pictureOfAnimal);
@@ -19,6 +20,7 @@ public class Rabbit extends AbstractHerbivorous{
         setWeightOfAnimal(weightOfAnimal);
         setKilogramsOfFoodForCompleteSaturation(kilogramsOfFoodForCompleteSaturation);
         setKilogramsOfFoodsInTheStomach(kilogramsOfFoodsInTheStomach);
+        setMaxStepsPerMove(MAX_STEPS_PER_MOVE);
     }
 
     @Override
@@ -30,6 +32,13 @@ public class Rabbit extends AbstractHerbivorous{
     public boolean eat(AbstractPlant plant) {
         eatPlant(plant);
         return true;
+    }
+
+    @Override
+    public void reproduce(AbstractAnimal animal) {
+        if (animal instanceof Rabbit){
+            newbornAnimals.add(new Rabbit());
+        }
     }
 
     @Override

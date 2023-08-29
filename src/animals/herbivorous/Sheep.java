@@ -12,6 +12,7 @@ public class Sheep extends AbstractHerbivorous{
     private final double kilogramsOfFoodForCompleteSaturation = 15d;
     private final Random random = new Random();
     private double kilogramsOfFoodsInTheStomach = 7.5d;
+    private final int MAX_STEPS_PER_MOVE = 3;
 
     public Sheep() {
         setPictureOfAnimal(pictureOfAnimal);
@@ -19,6 +20,7 @@ public class Sheep extends AbstractHerbivorous{
         setWeightOfAnimal(weightOfAnimal);
         setKilogramsOfFoodForCompleteSaturation(kilogramsOfFoodForCompleteSaturation);
         setKilogramsOfFoodsInTheStomach(kilogramsOfFoodsInTheStomach);
+        setMaxStepsPerMove(MAX_STEPS_PER_MOVE);
     }
 
     @Override
@@ -30,6 +32,12 @@ public class Sheep extends AbstractHerbivorous{
     public boolean eat(AbstractPlant plant) {
         eatPlant(plant);
         return true;
+    }
+    @Override
+    public void reproduce(AbstractAnimal animal) {
+        if (animal instanceof Sheep){
+            newbornAnimals.add(new Sheep());
+        }
     }
 
     @Override

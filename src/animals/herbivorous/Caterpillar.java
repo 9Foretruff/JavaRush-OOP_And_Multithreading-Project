@@ -12,6 +12,7 @@ public class Caterpillar extends AbstractHerbivorous {
     private final double kilogramsOfFoodForCompleteSaturation = 0d;
     private final Random random = new Random();
     private double kilogramsOfFoodsInTheStomach = 0d;
+    private final int MAX_STEPS_PER_MOVE = 0;
 
     public Caterpillar() {
         setPictureOfAnimal(pictureOfAnimal);
@@ -19,6 +20,7 @@ public class Caterpillar extends AbstractHerbivorous {
         setWeightOfAnimal(weightOfAnimal);
         setKilogramsOfFoodForCompleteSaturation(kilogramsOfFoodForCompleteSaturation);
         setKilogramsOfFoodsInTheStomach(kilogramsOfFoodsInTheStomach);
+        setMaxStepsPerMove(MAX_STEPS_PER_MOVE);
     }
 
     @Override
@@ -30,6 +32,12 @@ public class Caterpillar extends AbstractHerbivorous {
     public boolean eat(AbstractPlant plant) {
         eatPlant(plant);
         return true;
+    }
+    @Override
+    public void reproduce(AbstractAnimal animal) {
+        if (animal instanceof Caterpillar){
+            newbornAnimals.add(new Caterpillar());
+        }
     }
 
     @Override

@@ -13,6 +13,7 @@ public class Boa extends AbstractPredator {
     private final double kilogramsOfFoodForCompleteSaturation = 3d;
     private final Random random = new Random();
     private double kilogramsOfFoodsInTheStomach = 1.5d;
+    private final int MAX_STEPS_PER_MOVE = 1;
 
     public Boa() {
         setPictureOfAnimal(pictureOfAnimal);
@@ -20,6 +21,7 @@ public class Boa extends AbstractPredator {
         setWeightOfAnimal(weightOfAnimal);
         setKilogramsOfFoodForCompleteSaturation(kilogramsOfFoodForCompleteSaturation);
         setKilogramsOfFoodsInTheStomach(kilogramsOfFoodsInTheStomach);
+        setMaxStepsPerMove(MAX_STEPS_PER_MOVE);
     }
 
 
@@ -72,6 +74,13 @@ public class Boa extends AbstractPredator {
     @Override
     public boolean eat(AbstractPlant plant) {
         return false;
+    }
+
+    @Override
+    public void reproduce(AbstractAnimal animal) {
+        if (animal instanceof Boa){
+            newbornAnimals.add(new Boa());
+        }
     }
 
 

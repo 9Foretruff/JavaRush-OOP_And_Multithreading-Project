@@ -12,6 +12,7 @@ public class Deer extends AbstractHerbivorous {
     private final double kilogramsOfFoodForCompleteSaturation = 50d;
     private final Random random = new Random();
     private double kilogramsOfFoodsInTheStomach = 25d;
+    private final int MAX_STEPS_PER_MOVE = 4;
 
     public Deer() {
         setPictureOfAnimal(pictureOfAnimal);
@@ -19,6 +20,7 @@ public class Deer extends AbstractHerbivorous {
         setWeightOfAnimal(weightOfAnimal);
         setKilogramsOfFoodForCompleteSaturation(kilogramsOfFoodForCompleteSaturation);
         setKilogramsOfFoodsInTheStomach(kilogramsOfFoodsInTheStomach);
+        setMaxStepsPerMove(MAX_STEPS_PER_MOVE);
     }
 
     @Override
@@ -30,6 +32,13 @@ public class Deer extends AbstractHerbivorous {
     public boolean eat(AbstractPlant plant) {
         eatPlant(plant);
         return true;
+    }
+
+    @Override
+    public void reproduce(AbstractAnimal animal) {
+        if (animal instanceof Deer){
+            newbornAnimals.add(new Deer());
+        }
     }
 
     @Override

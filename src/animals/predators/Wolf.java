@@ -13,6 +13,7 @@ public class Wolf extends AbstractPredator {
     private final double kilogramsOfFoodForCompleteSaturation = 8d;
     private final Random random = new Random();
     private double kilogramsOfFoodsInTheStomach = 4d;
+    private final int MAX_STEPS_PER_MOVE = 3;
 
     public Wolf() {
         setPictureOfAnimal(pictureOfAnimal);
@@ -20,6 +21,7 @@ public class Wolf extends AbstractPredator {
         setWeightOfAnimal(weightOfAnimal);
         setKilogramsOfFoodForCompleteSaturation(kilogramsOfFoodForCompleteSaturation);
         setKilogramsOfFoodsInTheStomach(kilogramsOfFoodsInTheStomach);
+        setMaxStepsPerMove(MAX_STEPS_PER_MOVE);
     }
 
 
@@ -113,6 +115,13 @@ public class Wolf extends AbstractPredator {
     @Override
     public boolean eat(AbstractPlant plant) {
         return false;
+    }
+
+    @Override
+    public void reproduce(AbstractAnimal animal) {
+        if (animal instanceof Wolf){
+            newbornAnimals.add(new Wolf());
+        }
     }
 
 

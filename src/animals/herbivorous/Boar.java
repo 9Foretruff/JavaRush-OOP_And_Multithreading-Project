@@ -13,6 +13,7 @@ public class Boar extends AbstractHerbivorous implements EatAnimal {
     private final double kilogramsOfFoodForCompleteSaturation = 50d;
     private final Random random = new Random();
     private double kilogramsOfFoodsInTheStomach = 25d;
+    private final int MAX_STEPS_PER_MOVE = 2;
 
     public Boar() {
         setPictureOfAnimal(pictureOfAnimal);
@@ -20,7 +21,7 @@ public class Boar extends AbstractHerbivorous implements EatAnimal {
         setWeightOfAnimal(weightOfAnimal);
         setKilogramsOfFoodForCompleteSaturation(kilogramsOfFoodForCompleteSaturation);
         setKilogramsOfFoodsInTheStomach(kilogramsOfFoodsInTheStomach);
-
+        setMaxStepsPerMove(MAX_STEPS_PER_MOVE);
     }
 
 
@@ -58,6 +59,13 @@ public class Boar extends AbstractHerbivorous implements EatAnimal {
     public boolean eat(AbstractPlant plant) {
         eatPlant(plant);
         return true;
+    }
+
+    @Override
+    public void reproduce(AbstractAnimal animal) {
+        if (animal instanceof Boar){
+            newbornAnimals.add(new Boar());
+        }
     }
 
 

@@ -13,6 +13,7 @@ public class Bear extends AbstractPredator {
     private final double kilogramsOfFoodForCompleteSaturation = 80d;
     private final Random random = new Random();
     private double kilogramsOfFoodsInTheStomach = 40d;
+    private final int MAX_STEPS_PER_MOVE = 2;
 
     public Bear() {
         setPictureOfAnimal(pictureOfAnimal);
@@ -20,6 +21,7 @@ public class Bear extends AbstractPredator {
         setWeightOfAnimal(weightOfAnimal);
         setKilogramsOfFoodForCompleteSaturation(kilogramsOfFoodForCompleteSaturation);
         setKilogramsOfFoodsInTheStomach(kilogramsOfFoodsInTheStomach);
+        setMaxStepsPerMove(MAX_STEPS_PER_MOVE);
     }
 
 
@@ -121,6 +123,13 @@ public class Bear extends AbstractPredator {
     @Override
     public boolean eat(AbstractPlant plant) {
         return false;
+    }
+
+    @Override
+    public void reproduce(AbstractAnimal animal) {
+        if (animal instanceof Bear){
+            newbornAnimals.add(new Bear());
+        }
     }
 
 

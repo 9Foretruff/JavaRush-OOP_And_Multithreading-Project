@@ -13,6 +13,7 @@ public class Mouse extends AbstractHerbivorous implements EatAnimal {
     private final double kilogramsOfFoodForCompleteSaturation = 0.01d;
     private final Random random = new Random();
     private double kilogramsOfFoodsInTheStomach = 0.005d;
+    private final int MAX_STEPS_PER_MOVE = 1;
 
     public Mouse() {
         setPictureOfAnimal(pictureOfAnimal);
@@ -20,6 +21,7 @@ public class Mouse extends AbstractHerbivorous implements EatAnimal {
         setWeightOfAnimal(weightOfAnimal);
         setKilogramsOfFoodForCompleteSaturation(kilogramsOfFoodForCompleteSaturation);
         setKilogramsOfFoodsInTheStomach(kilogramsOfFoodsInTheStomach);
+        setMaxStepsPerMove(MAX_STEPS_PER_MOVE);
     }
 
     @Override
@@ -50,6 +52,12 @@ public class Mouse extends AbstractHerbivorous implements EatAnimal {
         return true;
     }
 
+    @Override
+    public void reproduce(AbstractAnimal animal) {
+        if (animal instanceof Mouse){
+            newbornAnimals.add(new Mouse());
+        }
+    }
 
     @Override
     public void run() {

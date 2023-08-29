@@ -12,6 +12,7 @@ public class Buffalo extends AbstractHerbivorous {
     private final double kilogramsOfFoodForCompleteSaturation = 100d;
     private final Random random = new Random();
     private double kilogramsOfFoodsInTheStomach = 50d;
+    private final int MAX_STEPS_PER_MOVE = 3;
 
     public Buffalo() {
         setPictureOfAnimal(pictureOfAnimal);
@@ -19,6 +20,7 @@ public class Buffalo extends AbstractHerbivorous {
         setWeightOfAnimal(weightOfAnimal);
         setKilogramsOfFoodForCompleteSaturation(kilogramsOfFoodForCompleteSaturation);
         setKilogramsOfFoodsInTheStomach(kilogramsOfFoodsInTheStomach);
+        setMaxStepsPerMove(MAX_STEPS_PER_MOVE);
     }
 
     @Override
@@ -32,6 +34,12 @@ public class Buffalo extends AbstractHerbivorous {
         return true;
     }
 
+    @Override
+    public void reproduce(AbstractAnimal animal) {
+        if (animal instanceof Buffalo) {
+            newbornAnimals.add(new Buffalo());
+        }
+    }
 
     @Override
     public void run() {

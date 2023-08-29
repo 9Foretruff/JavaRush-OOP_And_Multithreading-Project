@@ -13,6 +13,7 @@ public class Duck extends AbstractHerbivorous implements EatAnimal {
     private final double kilogramsOfFoodForCompleteSaturation = 0.15d;
     private final Random random = new Random();
     private double kilogramsOfFoodsInTheStomach = 0.10d;
+    private final int MAX_STEPS_PER_MOVE = 4;
 
     public Duck() {
         setPictureOfAnimal(pictureOfAnimal);
@@ -20,6 +21,7 @@ public class Duck extends AbstractHerbivorous implements EatAnimal {
         setWeightOfAnimal(weightOfAnimal);
         setKilogramsOfFoodForCompleteSaturation(kilogramsOfFoodForCompleteSaturation);
         setKilogramsOfFoodsInTheStomach(kilogramsOfFoodsInTheStomach);
+        setMaxStepsPerMove(MAX_STEPS_PER_MOVE);
     }
 
 
@@ -51,6 +53,12 @@ public class Duck extends AbstractHerbivorous implements EatAnimal {
         return true;
     }
 
+    @Override
+    public void reproduce(AbstractAnimal animal) {
+        if (animal instanceof Duck){
+            newbornAnimals.add(new Duck());
+        }
+    }
 
     @Override
     public void run() {
