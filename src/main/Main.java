@@ -1,20 +1,19 @@
 package main;
 
-import animals.AbstractAnimal;
+import animals.Animal;
 import animals.herbivorous.Boar;
-import animals.herbivorous.Deer;
-import animals.predators.Bear;
 import enums.Configuration;
 import exceptions.IncorrectIslandSizeException;
+import islands.variationsOfIslands.IslandFromConsole;
 import islands.variationsOfIslands.IslandWithRiverAndMountains;
-
-import java.util.ArrayList;
+import plants.Mint;
 
 public class Main {
-    public static void main(String[] args) throws IncorrectIslandSizeException {
-        IslandWithRiverAndMountains islandWithRiver = new IslandWithRiverAndMountains(40, 30, "My Island 1", 10, 10);
-        Settings settings = new Settings(Configuration.CUSTOM , islandWithRiver);
+    public static void main(String[] args) throws IncorrectIslandSizeException, InterruptedException {
+        IslandWithRiverAndMountains islandWithRiver = new IslandWithRiverAndMountains(30, 30, "My Island 1", 10, 10);
+        Settings settings = new Settings(Configuration.DEFAULT, islandWithRiver);
         islandWithRiver.setSettings(settings);
+        Animal.setIsland(islandWithRiver);
         Menu menu = new Menu(islandWithRiver, settings);
     }
 }

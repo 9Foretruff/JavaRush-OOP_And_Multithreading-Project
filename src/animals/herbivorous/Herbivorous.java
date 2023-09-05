@@ -1,10 +1,10 @@
 package animals.herbivorous;
 
-import animals.AbstractAnimal;
+import animals.Animal;
 import interfaces.EatPlant;
-import plants.AbstractPlant;
+import plants.Plant;
 
-public abstract class AbstractHerbivorous extends AbstractAnimal implements EatPlant {
+public abstract class Herbivorous extends Animal implements EatPlant {
 
     private String pictureOfAnimal;
     private String nameOfAnimal;
@@ -12,11 +12,12 @@ public abstract class AbstractHerbivorous extends AbstractAnimal implements EatP
     private double kilogramsOfFoodForCompleteSaturation;
     private double kilogramsOfFoodsInTheStomach;
 
+
     @Override
-    public void eatPlant(AbstractPlant plant) {
-        if (kilogramsOfFoodsInTheStomach < kilogramsOfFoodForCompleteSaturation) {
+    public void eatPlant(Plant plant) {
+        if (getKilogramsOfFoodsInTheStomach() < kilogramsOfFoodForCompleteSaturation) {
             if (plant.isAlive()) {
-                kilogramsOfFoodsInTheStomach += plant.getWeightOfPlant();
+                setKilogramsOfFoodsInTheStomach(getKilogramsOfFoodsInTheStomach() + plant.getWeightOfPlant());
                 plant.setAlive(false);
             }
         }

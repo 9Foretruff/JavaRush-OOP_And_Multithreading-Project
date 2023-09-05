@@ -1,16 +1,17 @@
 package islands;
 
-import animals.AbstractAnimal;
+import animals.Animal;
 import exceptions.IncorrectIslandSizeException;
-import islands.fieldTypes.AbstractField;
+import islands.fieldTypes.Field;
 import islands.fieldTypes.Ground;
 import islands.fieldTypes.Mountains;
 import islands.fieldTypes.Water;
 import main.Settings;
 
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
-public abstract class AbstractIsland {
+public abstract class Island {
     private final int minWidth = 10;
     private final int minHeight = 10;
     private final Random random = new Random();
@@ -22,18 +23,18 @@ public abstract class AbstractIsland {
     private final int RIGHT = 2;
     private final int UP = 3;
     private final int DOWN = 4;
-    protected AbstractField[][] fields;
-    protected AbstractIsland island;
+    public volatile Field[][] fields;
+    protected Island island;
     private int countOfAnimalsOnIsland = 0;
     private Settings settings;
 
-    public AbstractIsland(int height, int width, String nameOfIsland) throws IncorrectIslandSizeException {
+    public Island(int height, int width, String nameOfIsland) throws IncorrectIslandSizeException {
         if (minWidth > width || height > height)
             throw new IncorrectIslandSizeException("Incorrect parameters ! Min width = 10 , Min height = 10");
         this.width = width;
         this.height = height;
         this.nameOfIsland = nameOfIsland;
-        this.fields = new AbstractField[height][width];
+        this.fields = new Field[height][width];
     }
 
     public Settings getSettings() {
@@ -44,11 +45,11 @@ public abstract class AbstractIsland {
         this.settings = settings;
     }
 
-    public AbstractIsland getIsland() {
+    public Island getIsland() {
         return island;
     }
 
-    public void setIsland(AbstractIsland island) {
+    public void setIsland(Island island) {
         this.island = island;
     }
 
@@ -84,7 +85,7 @@ public abstract class AbstractIsland {
         this.countOfAnimalsOnIsland = countOfAnimalsOnIsland;
     }
 
-    public int howMuchAnimalsOnIsland(AbstractIsland abstractIsland) {
+    public int howMuchAnimalsOnIsland(Island island) {
         return getCountOfAnimalsOnIsland();
     }
 
@@ -131,39 +132,54 @@ public abstract class AbstractIsland {
         }
     }
 
-    public void moveAnimal(AbstractAnimal animal) {
+    public void moveAnimal(Animal animal) {
         int newX = animal.getX();
         int newY = animal.getY();
         int direction = random.nextInt(5);
         int steps = random.nextInt(animal.getMaxStepsPerMove() + 1);
         switch (direction) {
-            case UP:
-                newY = Math.max(animal.getY() - steps, 0);
-                break;
-            case RIGHT:
-                newX = Math.min(animal.getX() + steps, width);
-                break;
-            case DOWN:
-                newY = Math.min(animal.getY() + steps, height);
-                break;
-            case LEFT:
-                newX = Math.max(animal.getX() - steps, 0);
-                break;
+            case UP -> newY = animal.getY() + steps;
+            case RIGHT -> newX = animal.getX() + steps;
+            case DOWN -> newY = animal.getY() - steps;
+            case LEFT -> newX = animal.getX() - steps;
         }
         if (isValidMove(newX, newY, width, height)) {
             fields[animal.getY()][animal.getX()].animalsOnField.remove(animal);
-            fields[newY][newX].animalsOnField.add(animal);
             animal.setX(newX);
             animal.setY(newY);
+            fields[newY][newX].animalsOnField.add(animal);
         }
     }
 
     private boolean isValidMove(int newX, int newY, int maxX, int maxY) {
-        return newX >= 0 && newX <= maxX && newY >= 0 && newY <= maxY;
+        if (newX >= 0 && newX < maxX && newY >= 0 && newY < maxY) {
+            if (fields[newY][newX] instanceof Ground){
+                return true;
+            }
+        }
+        return false;
     }
 
-    public void fillingTheIslandWithAnimals() {
+    public void getStatistic(){
+        int countOfAnimals = 0;
+        for (int i = 0; i < fields.length ; i++) {
+            for (int j = 0; j < fields[i].length; j++) {
+                for (int k = 0; k < fields[i][j].animalsOnField.size(); k++) {
+                    countOfAnimals++;
+                }
+            }
+        }
+        System.out.println("countOfAnimals = " + countOfAnimals);
 
+        int countOfPlants = 0;
+        for (int i = 0; i < fields.length ; i++) {
+            for (int j = 0; j < fields[i].length; j++) {
+                for (int k = 0; k < fields[i][j].plantsOnField.size(); k++) {
+                    countOfPlants++;
+                }
+            }
+        }
+        System.out.println("countOfPlants = " + countOfPlants);
     }
 
 }

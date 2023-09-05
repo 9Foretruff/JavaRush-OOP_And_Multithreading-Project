@@ -1,45 +1,15 @@
-package animals;
+package animals.predators;
 
+import animals.Animal;
+import interfaces.EatAnimal;
 
-import plants.AbstractPlant;
-
-import java.util.ArrayList;
-
-public abstract class AbstractAnimal implements Runnable {
-    public ArrayList<AbstractAnimal> newbornAnimals = new ArrayList<>();
+public abstract class Predator extends Animal implements EatAnimal {
     private String pictureOfAnimal;
     private String nameOfAnimal;
     private double weightOfAnimal;
     private double kilogramsOfFoodForCompleteSaturation;
     private double kilogramsOfFoodsInTheStomach;
-    private boolean isAlive = true;
-    private int maxStepsPerMove;
-    private int y;
-    private int x;
 
-    public int getMaxStepsPerMove() {
-        return maxStepsPerMove;
-    }
-
-    public void setMaxStepsPerMove(int maxStepsPerMove) {
-        this.maxStepsPerMove = maxStepsPerMove;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
 
     public String getPictureOfAnimal() {
         return pictureOfAnimal;
@@ -80,18 +50,4 @@ public abstract class AbstractAnimal implements Runnable {
     public void setKilogramsOfFoodsInTheStomach(double kilogramsOfFoodsInTheStomach) {
         this.kilogramsOfFoodsInTheStomach = kilogramsOfFoodsInTheStomach;
     }
-
-    public boolean isAlive() {
-        return isAlive;
-    }
-
-    public void setAlive(boolean alive) {
-        isAlive = alive;
-    }
-
-    public abstract boolean eat(AbstractAnimal animal);
-
-    public abstract boolean eat(AbstractPlant plant);
-
-    public abstract void reproduce(AbstractAnimal animal);
 }

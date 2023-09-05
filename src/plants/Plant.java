@@ -1,13 +1,15 @@
 package plants;
 
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
-public abstract class AbstractPlant implements Runnable{
+public abstract class Plant implements Runnable {
+    protected final int timeDelay = 3000;
+    public static CopyOnWriteArrayList<Plant> newbornPlants = new CopyOnWriteArrayList<>();
     private String nameOfPlant;
     private String pictureOfPlant;
     private double weightOfPlant;
     private boolean isAlive = true;
-
 
     abstract void flowering();
 

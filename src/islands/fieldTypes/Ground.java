@@ -1,7 +1,7 @@
 package islands.fieldTypes;
 
 
-public class Ground extends AbstractField {
+public class Ground extends Field {
     private String groundPicture = "🟩";
 
     public Ground() {

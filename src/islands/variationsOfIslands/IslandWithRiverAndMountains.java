@@ -1,11 +1,12 @@
 package islands.variationsOfIslands;
 
 import exceptions.IncorrectIslandSizeException;
-import islands.AbstractIsland;
+import islands.Island;
 
-public class IslandWithRiverAndMountains extends AbstractIsland {
+public class IslandWithRiverAndMountains extends Island {
     private final int countOfLakes;
     private final int countOfMountains;
+    private final int formatPosition = 4;
 
     public IslandWithRiverAndMountains(int width, int height, String nameOfIsland, int countOfLakes, int countOfMountains) throws IncorrectIslandSizeException {
         super(width, height, nameOfIsland);
@@ -23,7 +24,7 @@ public class IslandWithRiverAndMountains extends AbstractIsland {
 
     @Override
     public void getMapFields() {
-        for (int i = 0; i < getWidth() / 4; i++) {
+        for (int i = 0; i < getWidth() / formatPosition; i++) {
             System.out.print("\t");
         }
         System.out.println(getNameOfIsland());

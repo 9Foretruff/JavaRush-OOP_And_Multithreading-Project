@@ -1,7 +1,8 @@
 package interfaces;
 
-import plants.AbstractPlant;
+import plants.Plant;
+
 @FunctionalInterface
 public interface EatPlant {
-     void eatPlant(AbstractPlant plant);
+    void eatPlant(Plant plant);
 }

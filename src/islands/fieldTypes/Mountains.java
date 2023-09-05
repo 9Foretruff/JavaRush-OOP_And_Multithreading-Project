@@ -1,7 +1,7 @@
 package islands.fieldTypes;
 
 
-public class Mountains extends AbstractField {
+public class Mountains extends Field {
     private String mountainsPicture = "⛰️";
 
     public Mountains() {

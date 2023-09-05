@@ -1,19 +1,35 @@
 package animals.predators;
 
-import animals.AbstractAnimal;
-import animals.herbivorous.*;
-import plants.AbstractPlant;
+import animals.Animal;
+import animals.herbivorous.Duck;
+import animals.herbivorous.Mouse;
+import animals.herbivorous.Rabbit;
+import islands.fieldTypes.Ground;
+import plants.Plant;
 
+import java.util.HashMap;
 import java.util.Random;
 
-public class Eagle extends AbstractPredator {
+public class Eagle extends Predator {
     private final String pictureOfAnimal = "🦅";
     private final String nameOfAnimal = "eagle";
     private final double weightOfAnimal = 6d;
     private final double kilogramsOfFoodForCompleteSaturation = 1d;
     private final Random random = new Random();
+    private final int maxStepsPerMove = 3;
+    private final HashMap<Animal, Integer> animalsThatCanBeEaten = new HashMap<>();
+    private final int chanceToKillFox = 10;
+    private final int chanceToKillRabbit = 90;
+    private final int chanceToKillMouse = 90;
+    private final int chanceToKillDuck = 80;
     private double kilogramsOfFoodsInTheStomach = 0.5d;
-    private final int MAX_STEPS_PER_MOVE = 3;
+
+    {
+        animalsThatCanBeEaten.put(new Fox(), chanceToKillFox);
+        animalsThatCanBeEaten.put(new Rabbit(), chanceToKillRabbit);
+        animalsThatCanBeEaten.put(new Mouse(), chanceToKillMouse);
+        animalsThatCanBeEaten.put(new Duck(), chanceToKillDuck);
+    }
 
     public Eagle() {
         setPictureOfAnimal(pictureOfAnimal);
@@ -21,42 +37,17 @@ public class Eagle extends AbstractPredator {
         setWeightOfAnimal(weightOfAnimal);
         setKilogramsOfFoodForCompleteSaturation(kilogramsOfFoodForCompleteSaturation);
         setKilogramsOfFoodsInTheStomach(kilogramsOfFoodsInTheStomach);
-        setMaxStepsPerMove(MAX_STEPS_PER_MOVE);
+        setMaxStepsPerMove(maxStepsPerMove);
     }
 
-
     @Override
-    public void eatAnimal(AbstractAnimal animal) {
-        int chanceToKill;
-        if (animal instanceof Fox) {
+    public void eatAnimal(Animal animal) {
+        int chanceNotToKill;
+        if (animalsThatCanBeEaten.containsKey(animal)) {
             if (kilogramsOfFoodsInTheStomach < kilogramsOfFoodForCompleteSaturation) {
-                chanceToKill = random.nextInt(0, 100 + 1);
-                if (chanceToKill >= 90) {
-                    kilogramsOfFoodsInTheStomach += ((Fox) animal).getWeightOfAnimal();
-                    animal.setAlive(false);
-                }
-            }
-        } else if (animal instanceof Rabbit) {
-            if (kilogramsOfFoodsInTheStomach < kilogramsOfFoodForCompleteSaturation) {
-                chanceToKill = random.nextInt(0, 100 + 1);
-                if (chanceToKill >= 10) {
-                    kilogramsOfFoodsInTheStomach += ((Rabbit) animal).getWeightOfAnimal();
-                    animal.setAlive(false);
-                }
-            }
-        }else if (animal instanceof Mouse) {
-            if (kilogramsOfFoodsInTheStomach < kilogramsOfFoodForCompleteSaturation) {
-                chanceToKill = random.nextInt(0, 100 + 1);
-                if (chanceToKill >= 10) {
-                    kilogramsOfFoodsInTheStomach += ((Mouse) animal).getWeightOfAnimal();
-                    animal.setAlive(false);
-                }
-            }
-        }else if (animal instanceof Duck) {
-            if (kilogramsOfFoodsInTheStomach < kilogramsOfFoodForCompleteSaturation) {
-                chanceToKill = random.nextInt(0, 100 + 1);
-                if (chanceToKill >= 20) {
-                    kilogramsOfFoodsInTheStomach += ((Duck) animal).getWeightOfAnimal();
+                chanceNotToKill = random.nextInt(0, 100 + 1);
+                if (animalsThatCanBeEaten.get(animal) >= chanceNotToKill) {
+                    kilogramsOfFoodsInTheStomach += animal.getWeightOfAnimal();
                     animal.setAlive(false);
                 }
             }
@@ -64,28 +55,70 @@ public class Eagle extends AbstractPredator {
     }
 
     @Override
-    public boolean eat(AbstractAnimal animal) {
-        if (animal instanceof Fox || animal instanceof Rabbit ||  animal instanceof Mouse || animal instanceof Duck) {
+    public void dieFromStarvation() {
+
+    }
+
+    @Override
+    public boolean eat(Animal animal) {
+        if (animalsThatCanBeEaten.containsKey(animal)) {
             eatAnimal(animal);
         }
         return true;
     }
 
     @Override
-    public boolean eat(AbstractPlant plant) {
+    public boolean eat(Plant plant) {
         return false;
     }
 
     @Override
-    public void reproduce(AbstractAnimal animal) {
-        if (animal instanceof Eagle){
+    public void reproduce(Animal animal) {
+        if (animal instanceof Eagle) {
             newbornAnimals.add(new Eagle());
         }
+    }
+
+    protected void getHungry() {
+        double hungry = getKilogramsOfFoodForCompleteSaturation() / 100 * 10;
+        setKilogramsOfFoodsInTheStomach(getKilogramsOfFoodsInTheStomach() - hungry);
     }
 
 
     @Override
     public void run() {
+        while (true) {
+            setY(random.nextInt(island.getHeight()));
+            setX(random.nextInt(island.getWidth()));
+            if (!(island.fields[getY()][getY()].getPictureOfField().equals("🟦")||island.fields[getY()][getY()].getPictureOfField().equals("⛰️"))){
+                break;
+            }
+        }
+        island.fields[getY()][getX()].animalsOnField.add(this);
+        while (isAlive()) {
+            island.moveAnimal(this);
 
+            for (Animal animal : island.fields[getY()][getX()].animalsOnField) {
+                this.reproduce(animal);
+            }
+
+            for (Plant plant : island.fields[getY()][getX()].plantsOnField) {
+                this.eat(plant);
+            }
+
+            for (Animal animal : island.fields[getY()][getX()].animalsOnField) {
+                this.eat(animal);
+            }
+
+            getHungry();
+            dieFromStarvation();
+
+
+            try {
+                Thread.sleep(2500);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }

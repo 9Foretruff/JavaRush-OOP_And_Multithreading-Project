@@ -1,10 +1,10 @@
 package plants;
 
-public class Chamomile extends AbstractPlant{
+public class Chamomile extends Plant {
 
-    private String nameOfFlower = "chamomile";
-    private String pictureOfFlower = "🌼";
-    private double weightOfFlower = 1.0;
+    private final String nameOfFlower = "chamomile";
+    private final String pictureOfFlower = "🌼";
+    private final double weightOfFlower = 1.0;
 
 
     public Chamomile() {
@@ -15,11 +15,18 @@ public class Chamomile extends AbstractPlant{
 
     @Override
     public void run() {
-
+        while (isAlive()) {
+            flowering();
+            try {
+                this.wait(timeDelay);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     @Override
     void flowering() {
-
+        newbornPlants.add(new Chamomile());
     }
 }
