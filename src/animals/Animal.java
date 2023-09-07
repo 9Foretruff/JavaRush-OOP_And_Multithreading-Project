@@ -4,15 +4,14 @@ package animals;
 import islands.Island;
 import plants.Plant;
 
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public abstract class Animal implements Runnable {
-    protected volatile static Island island;
-    protected final int timeDelay = 3000;
     public static CopyOnWriteArrayList<Animal> newbornAnimals = new CopyOnWriteArrayList<>();
     public static volatile Object lock = new Object();
+    protected volatile static Island island;
+    protected final int timeDelay = 3000;
     private volatile String pictureOfAnimal;
     private String nameOfAnimal;
     private double weightOfAnimal;
@@ -22,17 +21,16 @@ public abstract class Animal implements Runnable {
     private int maxStepsPerMove;
     private volatile int y;
     private volatile int x;
-
+    public abstract void dieFromStarvation();
+    public abstract boolean eat(Plant plant);
+    public abstract void reproduce(Animal animal);
+    public abstract boolean eat(Animal animal);
     public static Island getIsland() {
         return island;
     }
-
     public static void setIsland(Island island) {
         Animal.island = island;
     }
-
-
-    abstract public void dieFromStarvation();
 
     public int getMaxStepsPerMove() {
         return maxStepsPerMove;
@@ -106,8 +104,6 @@ public abstract class Animal implements Runnable {
         isAlive = alive;
     }
 
-    public abstract boolean eat(Animal animal);
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -120,8 +116,4 @@ public abstract class Animal implements Runnable {
     public int hashCode() {
         return Objects.hash(pictureOfAnimal, nameOfAnimal);
     }
-
-    public abstract boolean eat(Plant plant);
-
-    public abstract void reproduce(Animal animal);
 }

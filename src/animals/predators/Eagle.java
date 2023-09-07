@@ -4,6 +4,7 @@ import animals.Animal;
 import animals.herbivorous.Duck;
 import animals.herbivorous.Mouse;
 import animals.herbivorous.Rabbit;
+import exceptions.InterruptedWhileRunningException;
 import islands.fieldTypes.Ground;
 import plants.Plant;
 
@@ -113,11 +114,10 @@ public class Eagle extends Predator {
             getHungry();
             dieFromStarvation();
 
-
             try {
                 Thread.sleep(2500);
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                throw new InterruptedWhileRunningException("Thread was interrupted while running");
             }
         }
     }

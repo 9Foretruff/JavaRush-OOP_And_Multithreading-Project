@@ -1,6 +1,7 @@
 package animals.herbivorous;
 
 import animals.Animal;
+import exceptions.InterruptedWhileRunningException;
 import islands.fieldTypes.Ground;
 import plants.Plant;
 
@@ -82,11 +83,10 @@ public class Goat extends Herbivorous {
             getHungry();
             dieFromStarvation();
 
-
             try {
                 Thread.sleep(2500);
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                throw new InterruptedWhileRunningException("Thread was interrupted while running");
             }
         }
     }
