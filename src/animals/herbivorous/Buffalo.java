@@ -50,7 +50,7 @@ public class Buffalo extends Herbivorous {
 
     @Override
     public void reproduce(Animal animal) {
-        if (animal instanceof Buffalo) {
+        if (animal instanceof Buffalo && !animal.equals(this)) {
             newbornAnimals.add(new Buffalo());
         }
     }

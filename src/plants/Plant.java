@@ -1,15 +1,45 @@
 package plants;
 
-import java.util.ArrayList;
+import islands.Island;
+
+import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public abstract class Plant implements Runnable {
-    protected final int timeDelay = 3000;
     public static CopyOnWriteArrayList<Plant> newbornPlants = new CopyOnWriteArrayList<>();
+    protected volatile static Island island;
+    protected final int timeDelay = 3000;
+    protected Random random = new Random();
     private String nameOfPlant;
     private String pictureOfPlant;
     private double weightOfPlant;
     private boolean isAlive = true;
+    private volatile int y;
+    private volatile int x;
+
+    public static Island getIsland() {
+        return island;
+    }
+
+    public static void setIsland(Island island) {
+        Plant.island = island;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
 
     abstract void flowering();
 

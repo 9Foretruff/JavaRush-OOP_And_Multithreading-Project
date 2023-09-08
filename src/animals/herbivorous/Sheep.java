@@ -50,7 +50,7 @@ public class Sheep extends Herbivorous {
 
     @Override
     public void reproduce(Animal animal) {
-        if (animal instanceof Sheep) {
+        if (animal instanceof Sheep && !animal.equals(this)) {
             newbornAnimals.add(new Sheep());
         }
     }

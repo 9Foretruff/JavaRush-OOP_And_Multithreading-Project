@@ -45,7 +45,7 @@ public class Caterpillar extends Herbivorous {
 
     @Override
     public void reproduce(Animal animal) {
-        if (animal instanceof Caterpillar) {
+        if (animal instanceof Caterpillar && !animal.equals(this)) {
             newbornAnimals.add(new Caterpillar());
         }
     }

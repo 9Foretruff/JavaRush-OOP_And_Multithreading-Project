@@ -76,7 +76,7 @@ public class Duck extends Herbivorous implements EatAnimal {
 
     @Override
     public void reproduce(Animal animal) {
-        if (animal instanceof Duck) {
+        if (animal instanceof Duck && !animal.equals(this)) {
             newbornAnimals.add(new Duck());
         }
     }

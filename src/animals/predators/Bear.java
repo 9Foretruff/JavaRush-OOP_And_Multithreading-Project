@@ -87,8 +87,8 @@ public class Bear extends Predator {
 
     @Override
     public void reproduce(Animal animal) {
-        if (animal instanceof Bear) {
-            newbornAnimals.add(new Bear());
+        if (animal instanceof Boar && !animal.equals(this)) {
+            newbornAnimals.add(new Boar());
         }
     }
 

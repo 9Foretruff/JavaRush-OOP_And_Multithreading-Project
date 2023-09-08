@@ -75,11 +75,10 @@ public class Mouse extends Herbivorous implements EatAnimal {
 
     @Override
     public void reproduce(Animal animal) {
-        if (animal instanceof Mouse) {
+        if (animal instanceof Mouse && !animal.equals(this)) {
             newbornAnimals.add(new Mouse());
         }
     }
-
     @Override
     public void run() {
         while (true) {

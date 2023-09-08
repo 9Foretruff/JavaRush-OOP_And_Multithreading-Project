@@ -79,7 +79,7 @@ public class Boar extends Herbivorous implements EatAnimal {
 
     @Override
     public void reproduce(Animal animal) {
-        if (animal instanceof Boar) {
+        if (animal instanceof Boar && !animal.equals(this)) {
             newbornAnimals.add(new Boar());
         }
     }

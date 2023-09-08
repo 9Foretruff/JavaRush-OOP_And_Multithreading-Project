@@ -24,21 +24,21 @@ public class Settings {
     private Scanner userChoice = new Scanner(System.in);
     private HashMap<Animal, Integer> availableAnimals = new HashMap<>();
     protected HashMap<Animal, Integer> animalsThatChosenByThePlayer = new HashMap<>();
-    private int countOfBoars = 1;
-    private int countOfBuffaloes = 1;
-    private int countOfCaterpillars = 1;
-    private int countOfDeer = 1;
-    private int countOfDucks = 1;
-    private int countOfGoats = 1;
-    private int countOfHorses = 1;
-    private int countOfMouses = 1;
-    private int countOfRabbits = 1;
-    private int countOfSheep = 1;
-    private int countOfBear = 1;
-    private int countOfBoas = 1;
-    private int countOfEagles = 1;
-    private int countOfFoxes = 1;
-    private int countOfWolfs = 1;
+    private int countOfBoars = 5;
+    private int countOfBuffaloes = 5;
+    private int countOfCaterpillars = 5;
+    private int countOfDeer = 5;
+    private int countOfDucks = 5;
+    private int countOfGoats = 5;
+    private int countOfHorses = 5;
+    private int countOfMouses = 5;
+    private int countOfRabbits = 5;
+    private int countOfSheep = 5;
+    private int countOfBear = 5;
+    private int countOfBoas = 5;
+    private int countOfEagles = 5;
+    private int countOfFoxes = 5;
+    private int countOfWolfs = 5;
 
     {
         availableAnimals.put(new Boar(), countOfBoars);

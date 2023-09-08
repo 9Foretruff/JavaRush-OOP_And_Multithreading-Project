@@ -1,10 +1,7 @@
 package animals.predators;
 
 import animals.Animal;
-import animals.herbivorous.Caterpillar;
-import animals.herbivorous.Duck;
-import animals.herbivorous.Mouse;
-import animals.herbivorous.Rabbit;
+import animals.herbivorous.*;
 import exceptions.InterruptedWhileRunningException;
 import islands.fieldTypes.Ground;
 import plants.Plant;
@@ -77,7 +74,7 @@ public class Fox extends Predator {
 
     @Override
     public void reproduce(Animal animal) {
-        if (animal instanceof Fox) {
+        if (animal instanceof Fox && !animal.equals(this)) {
             newbornAnimals.add(new Fox());
         }
     }

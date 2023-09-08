@@ -50,11 +50,10 @@ public class Goat extends Herbivorous {
 
     @Override
     public void reproduce(Animal animal) {
-        if (animal instanceof Goat) {
+        if (animal instanceof Goat && !animal.equals(this)) {
             newbornAnimals.add(new Goat());
         }
     }
-
     @Override
     public void run() {
         while (true) {

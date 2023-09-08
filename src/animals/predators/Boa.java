@@ -1,6 +1,7 @@
 package animals.predators;
 
 import animals.Animal;
+import animals.herbivorous.Boar;
 import animals.herbivorous.Duck;
 import animals.herbivorous.Mouse;
 import animals.herbivorous.Rabbit;
@@ -78,7 +79,7 @@ public class Boa extends Predator {
 
     @Override
     public void reproduce(Animal animal) {
-        if (animal instanceof Boa) {
+        if (animal instanceof Boa && !animal.equals(this)) {
             newbornAnimals.add(new Boa());
         }
     }
